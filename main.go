@@ -1,7 +1,7 @@
 package main
 
 import (
-	"lsd/cmd"
+	"github.com/sharan-cj/lsd/cmd"
 )
 
 func main() {

@@ -1,4 +1,4 @@
-module lsd
+module github.com/sharan-cj/lsd
 
 go 1.22.1
 

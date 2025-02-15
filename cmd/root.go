@@ -2,8 +2,9 @@ package cmd
 
 import (
 	"fmt"
-	"lsd/utils"
 	"os"
+
+	"github.com/sharan-cj/lsd/utils"
 
 	"github.com/charmbracelet/lipgloss/tree"
 	"github.com/spf13/cobra"
