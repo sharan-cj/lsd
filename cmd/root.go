@@ -45,7 +45,7 @@ func execFunc(cmd *cobra.Command, args []string) {
 		dir = args[0]
 	}
 
-	t := tree.New().Root(dir)
+	t := tree.New().Root(utils.DirStyle.Render(dir))
 
 	if maxDepth {
 		depth = math.MaxUint8
