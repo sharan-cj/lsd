@@ -5,7 +5,8 @@ import (
 	"math"
 	"os"
 
-	"github.com/sharan-cj/lsd/utils"
+	"github.com/sharan-cj/lsd/packages/styles"
+	"github.com/sharan-cj/lsd/packages/utils"
 
 	"github.com/charmbracelet/lipgloss/tree"
 	"github.com/spf13/cobra"
@@ -45,12 +46,13 @@ func execFunc(cmd *cobra.Command, args []string) {
 		dir = args[0]
 	}
 
-	t := tree.New().Root(utils.DirStyle.Render(dir))
+	t := tree.New().Root(styles.DirStyle.Render(dir))
 
 	if maxDepth {
 		depth = math.MaxUint8
 	}
 
 	utils.BuildTree(t, dir, depth, verbose)
+	fmt.Println("")
 	fmt.Println(t)
 }
