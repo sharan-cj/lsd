@@ -14,6 +14,12 @@ go install github.com/sharan-cj/lsd@latest
 lsd --max --all
 ```
 
+### Output
+
+![lsd](./images/screenshot.png)
+
+### Flags
+
 ```cmd
 Flags:
   -a, --all           views all files and directories, including hidden ones.
