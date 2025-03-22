@@ -11,11 +11,12 @@ go install github.com/sharan-cj/lsd@latest
 ### Usage
 
 ```sh
-lsd path/to/dir -M --verbose
+lsd --max --all
 ```
 
 ```cmd
 Flags:
+  -a, --all           views all files and directories, including hidden ones.
   -d, --depth         Depth of the tree. Default is 2.
   -h, --help          help for lsd
   -M, --max           Print the max depth of the tree. Default is false.
