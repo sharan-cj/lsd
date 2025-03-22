@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"os"
+	"time"
 
 	"github.com/sharan-cj/lsd/packages/styles"
 	"github.com/sharan-cj/lsd/packages/utils"
@@ -16,6 +17,7 @@ import (
 var depth uint8
 var verbose bool
 var maxDepth bool
+var all bool
 
 var rootCmd = &cobra.Command{
 	Use:     "lsd",
@@ -27,9 +29,10 @@ var rootCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.Flags().Uint8VarP(&depth, "depth", "d", 2, "Depth of the tree. Default is 2.")
+	rootCmd.Flags().Uint8VarP(&depth, "depth", "d", 2, "Depth of the tree.")
 	rootCmd.Flags().BoolVarP(&maxDepth, "max", "M", false, "Print the max depth of the tree. Default is false.")
 	rootCmd.Flags().BoolVar(&verbose, "verbose", false, "Verbose mode. Default is false.")
+	rootCmd.Flags().BoolVarP(&all, "all", "a", false, "views all files and directories, including hidden ones.")
 }
 
 func Execute() {
@@ -42,17 +45,31 @@ func Execute() {
 func execFunc(cmd *cobra.Command, args []string) {
 	dir := "."
 
+	var dirName string
+
 	if len(args) > 0 {
 		dir = args[0]
+		dirName = dir
+	} else {
+		wd, err := os.Getwd()
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		dirName = wd
 	}
 
-	t := tree.New().Root(styles.DirStyle.Render(dir))
+	t := tree.New().Root(styles.DirStyle.Render(dirName))
 
 	if maxDepth {
 		depth = math.MaxUint8
 	}
 
-	utils.BuildTree(t, dir, depth, verbose)
+	start := time.Now()
+	utils.BuildTree(t, dir, depth, verbose, all)
 	fmt.Println("")
 	fmt.Println(t)
+
+	elapsed := time.Since(start)
+	fmt.Printf("Time taken: %s\n", elapsed)
 }
